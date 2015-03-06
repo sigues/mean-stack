@@ -79,16 +79,10 @@ router.post('/posts/:post/comments', function(req, res, next) {
 });
 
 router.put('/posts/:post/comments/:comment/upvote', function(req, res, next) {
-    var query = {"_id": req.comment};
-    console.log(req.post.comments);
-    req.post.comments.find(query, function(err, doc) {
-        console.log(doc);
-        res.json(doc);
-        doc.upvote(function(err, comment){
-          if (err) { return next(err); }
+    req.comment.upvote(function(err, comment){
+      if (err) { return next(err); }
 
-          res.json(comment);
-        });
+      res.json(comment);
     });
 });
 
